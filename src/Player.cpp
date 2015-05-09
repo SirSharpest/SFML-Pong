@@ -38,8 +38,7 @@ void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed){
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-value"
+
 /*
  * Performs movement for the player
  * TODO: Collision detection

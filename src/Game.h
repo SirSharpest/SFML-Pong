@@ -28,6 +28,7 @@ private:
 	bool isRectCollision(sf::Sprite &rect1, sf::Sprite &rect2);
 	void handleCollisions();
 	void updateFPSCounter(sf::Time dt);
+    void updateScores(bool p1Scored);
 
 
 
@@ -47,6 +48,9 @@ private:
 	sf::Time g_FpsTimer;
 	int g_FpsNumFrames;
 
+	sf::Text g_P1Score;
+	sf::Text g_P2Score;
+
 	int g_GameState;
 	enum states{INTRO = 0, PLAYING = 1};
 
@@ -59,6 +63,8 @@ private:
 	Player g_Player1;
     Player g_Player2;
 	Ball g_Ball;
+
+    int g_P1NumScore, g_P2NumScore;
 
 
 

@@ -21,6 +21,8 @@ TIME_PER_FRAME(sf::seconds(1.f/FRAMES_PER_SECOND)),
 g_Fps(),
 g_FpsTimer(),
 g_FpsNumFrames(),
+g_P1Score(),
+g_P2Score(),
 g_GameState(0),
 g_SplashScreenTexture(),
 g_SplashScreenSprite(),
@@ -29,7 +31,9 @@ g_BackgroundTexture(),
 g_SolidBackground(),
 g_Player1(),
 g_Player2(),
-g_Ball()
+g_Ball(),
+g_P1NumScore(0),
+g_P2NumScore(0)
 {
 
 
@@ -46,18 +50,30 @@ g_Ball()
 	g_SplashScreenSprite.setPosition(0.f,0.f);
 
 	//setting g_Fps info
-	g_Fps.setCharacterSize(20);
 	g_Fps.setFont(g_Font);
 	g_Fps.setPosition(300,0);
     g_Fps.setColor(sf::Color::Black);
     g_Fps.setCharacterSize(24);
+
+	//setting Score info
+	g_P1Score.setCharacterSize(40);
+	g_P1Score.setFont(g_Font);
+	g_P1Score.setPosition(120, 200);
+	g_P1Score.setColor(sf::Color::Black);
+	g_P1Score.setString("0");
+
+	g_P2Score.setCharacterSize(40);
+	g_P2Score.setFont(g_Font);
+	g_P2Score.setPosition(520, 200);
+	g_P2Score.setColor(sf::Color::Black);
+	g_P2Score.setString("0");
 
     //set player 2's default position
     g_Player2.setPosition(610, 0);
 
     //set the solid background
     g_SolidBackground.setSize(sf::Vector2f(640, 480));
-    g_SolidBackground.setFillColor(sf::Color::Green);
+    g_SolidBackground.setFillColor(sf::Color::White);
     g_SolidBackground.setPosition(0,0);
 
 
@@ -125,13 +141,8 @@ void Game::processEvents(){
 				else if(event.type == sf::Event::KeyReleased){
 					g_Player1.handlePlayerInput(event.key.code, false);
 				}
-
 			}
-
-
 		}
-
-
 }
 
 //perform logic and call for collision checks
@@ -139,6 +150,8 @@ void Game::update(sf::Time elapsedTime){
 
 
     if(g_GameState == PLAYING){
+
+
         //move the player
         g_Player1.updatePlayer(elapsedTime);
         g_Ball.updateBall(elapsedTime);
@@ -146,6 +159,10 @@ void Game::update(sf::Time elapsedTime){
 
         //handle collisions
         handleCollisions();
+
+		if(g_P1NumScore > 5 || g_P2NumScore >5){
+			g_Window.close();
+		}
     }
 
 
@@ -167,10 +184,6 @@ void Game::handleCollisions(){
     //check for colliding with paddles
     if(isRectCollision(g_Ball, g_Player1)){
         g_Ball.reverseX();
-        //check for top of ball collision
-        if(g_Ball.getPosition().y == g_Player1.getPosition().y + g_Player1.getGlobalBounds().height){
-            g_Ball.reverseY();
-        }
     }
     else if (isRectCollision(g_Ball, g_Player2)){
         g_Ball.reverseX();
@@ -179,9 +192,11 @@ void Game::handleCollisions(){
     //check if ball has exited left or right of screen
     if(g_Ball.getPosition().x <= -30){
         g_Ball.reset();
+		updateScores(false);
     }
     else if(g_Ball.getPosition().x >= 645){
         g_Ball.reset();
+		updateScores(true);
     }
 
 
@@ -216,6 +231,26 @@ void Game::updateFPSCounter(sf::Time dt){
 
 }
 
+/**
+ * Updates the scores on screen if a player makes a score
+ */
+void Game::updateScores(bool p1Scored) {
+
+	std::ostringstream ss;
+
+	if(p1Scored){
+		g_P1NumScore += 1;
+		ss << g_P1NumScore;
+		g_P1Score.setString(ss.str());
+	}
+	else{
+		g_P2NumScore +=1;
+		ss << g_P2NumScore;
+		g_P2Score.setString(ss.str());
+	}
+
+}
+
 //re-apply changes to window
 void Game::render(){
 
@@ -229,6 +264,8 @@ void Game::render(){
 			break;
 		case PLAYING:
             g_Window.draw(g_SolidBackground);
+			g_Window.draw(g_P1Score);
+			g_Window.draw(g_P2Score);
 			g_Window.draw(g_Player1);
             g_Window.draw(g_Player2);
             g_Window.draw(g_Ball);

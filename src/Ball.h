@@ -26,8 +26,6 @@ public:
 private:
 
     sf::Texture mBallTexture;
-
-    float mSpeed;
     sf::Vector2f mMovement;
 
 
