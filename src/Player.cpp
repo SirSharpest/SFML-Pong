@@ -14,8 +14,6 @@ Player::Player():
 mSpeed(200.f),
 movement(0.f, 0.f),
 mSize(1,1),
-mPosX(0),
-mPosY(0),
 mColor(sf::Color::Blue),
 mIsMovingUp(false),
 mIsMovingDown(false),
@@ -24,6 +22,8 @@ mPlayerTexture()
 
     mPlayerTexture.loadFromFile("images/paddle.png");
     this->setTexture(mPlayerTexture);
+
+
 
 }
 

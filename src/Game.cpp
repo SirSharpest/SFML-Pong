@@ -15,7 +15,7 @@ a * Game.cpp
 
 Game::Game():
 g_Window(sf::VideoMode(640, 480), "SFML"),
-g_AlexandriaFont(),
+g_Font(),
 FRAMES_PER_SECOND(60),
 TIME_PER_FRAME(sf::seconds(1.f/FRAMES_PER_SECOND)),
 g_Fps(),
@@ -39,7 +39,7 @@ g_Ball()
 
 
 	//setting font location
-	g_AlexandriaFont.loadFromFile("fonts/AlexandriaFLF.ttf");
+	g_Font.loadFromFile("fonts/KenPixel Square.ttf");
 	//loading splash screen
 	g_SplashScreenTexture.loadFromFile("images/intro.png");
 	g_SplashScreenSprite.setTexture(g_SplashScreenTexture);
@@ -47,8 +47,8 @@ g_Ball()
 
 	//setting g_Fps info
 	g_Fps.setCharacterSize(20);
-	g_Fps.setFont(g_AlexandriaFont);
-	g_Fps.setPosition(0,0);
+	g_Fps.setFont(g_Font);
+	g_Fps.setPosition(300,0);
     g_Fps.setColor(sf::Color::Black);
     g_Fps.setCharacterSize(24);
 
@@ -137,13 +137,17 @@ void Game::processEvents(){
 //perform logic and call for collision checks
 void Game::update(sf::Time elapsedTime){
 
-	//move the player
-	g_Player1.updatePlayer(elapsedTime);
-    g_Ball.updateBall(elapsedTime);
-    g_Player2.autoMove(g_Ball, elapsedTime);
 
-	//handle collisions
-	handleCollisions();
+    if(g_GameState == PLAYING){
+        //move the player
+        g_Player1.updatePlayer(elapsedTime);
+        g_Ball.updateBall(elapsedTime);
+        g_Player2.autoMove(g_Ball, elapsedTime);
+
+        //handle collisions
+        handleCollisions();
+    }
+
 
 
 }
@@ -163,6 +167,10 @@ void Game::handleCollisions(){
     //check for colliding with paddles
     if(isRectCollision(g_Ball, g_Player1)){
         g_Ball.reverseX();
+        //check for top of ball collision
+        if(g_Ball.getPosition().y == g_Player1.getPosition().y + g_Player1.getGlobalBounds().height){
+            g_Ball.reverseY();
+        }
     }
     else if (isRectCollision(g_Ball, g_Player2)){
         g_Ball.reverseX();

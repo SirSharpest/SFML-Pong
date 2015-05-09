@@ -36,7 +36,7 @@ private:
 	sf::RenderWindow g_Window;
 
 	//Creating font
-	sf::Font g_AlexandriaFont;
+	sf::Font g_Font;
 
 
 	const int FRAMES_PER_SECOND;
