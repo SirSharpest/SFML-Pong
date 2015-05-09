@@ -4,8 +4,6 @@
  *  Created on: 2 Apr 2015
  *      Author: nathan
  *
- *  Currently loads a wizard sprite
- *
  */
 
 #include "Player.h"
