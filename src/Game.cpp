@@ -264,6 +264,7 @@ void Game::render(){
 			break;
 		case PLAYING:
             g_Window.draw(g_SolidBackground);
+
 			g_Window.draw(g_P1Score);
 			g_Window.draw(g_P2Score);
 			g_Window.draw(g_Player1);

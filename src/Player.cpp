@@ -10,7 +10,7 @@
 
 Player::Player():
 mSpeed(200.f),
-movement(0.f, 0.f),
+mVelocity(0.f, 0.f),
 mSize(1,1),
 mColor(sf::Color::Blue),
 mIsMovingUp(false),
@@ -44,39 +44,49 @@ void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed){
 void Player::updatePlayer(sf::Time elapsedTime){
 
     //Not using deceleration
-    //so setting movement as 0 each time
-    movement.x = 0;
-    movement.y = 0;
+    //so setting mVelocity as 0 each time
+    mVelocity.x = 0;
+    mVelocity.y = 0;
 
     //Handle if player keys are pressed to move up
     //or down
     if(mIsMovingUp){
-        movement.y = -mSpeed;
+        mVelocity.y = -mSpeed;
     }
     else if(mIsMovingDown){
-        movement.y = mSpeed;
+        mVelocity.y = mSpeed;
     }
 
 
-    //move the play based on current movement size
-    this->move(movement * elapsedTime.asSeconds());
+    //move the play based on current mVelocity size
+    this->move(mVelocity * elapsedTime.asSeconds());
 
 }
 
+/**
+ * returns the players velocity
+ */
+sf::Vector2f Player::getVelocity(){
+
+    return this->mVelocity;
+
+}
+
+
 void Player::autoMove(sf::Sprite spriteToFollow, sf::Time elapsedTime) {
 
-    movement.x = 0;
-    movement.y = 0;
+    mVelocity.x = 0;
+    mVelocity.y = 0;
 
 
-    if(this->getPosition().y < spriteToFollow.getPosition().y){
-        movement.y = mSpeed;
+    if(this->getPosition().y +(this->getGlobalBounds().height /2) < spriteToFollow.getPosition().y){
+        mVelocity.y = mSpeed;
     }
-    else if(this->getPosition().y > spriteToFollow.getPosition().y){
-        movement.y = -mSpeed;
+    else if(this->getPosition().y +(this->getGlobalBounds().height/2)  > spriteToFollow.getPosition().y){
+        mVelocity.y = -mSpeed;
     }
 
-    this->move(movement * elapsedTime.asSeconds());
+    this->move(mVelocity * elapsedTime.asSeconds());
 
 }
 

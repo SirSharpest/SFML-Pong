@@ -17,13 +17,13 @@ public:
 	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 	void updatePlayer(sf::Time elapsedTime);
     void autoMove(sf::Sprite spriteToFollow, sf::Time elapsedTime);
-
+	sf::Vector2f getVelocity();
 
 private:
 
 	//properties of the player
 	float mSpeed;
-	sf::Vector2f movement;
+	sf::Vector2f mVelocity;
 	sf::Vector2f mSize;
 	sf::Color mColor;
 
