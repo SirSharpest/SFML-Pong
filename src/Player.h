@@ -19,6 +19,12 @@ public:
     void autoMove(sf::Sprite spriteToFollow, sf::Time elapsedTime);
 	sf::Vector2f getVelocity();
 
+	sf::RectangleShape* getTop();
+	sf::RectangleShape* getBottom();
+	sf::RectangleShape* getLeft();
+	sf::RectangleShape* getRight();
+
+
 private:
 
 	//properties of the player
@@ -32,7 +38,9 @@ private:
 
 	sf::Texture mPlayerTexture;
 
-
+	//collision rects
+	sf::RectangleShape mTop, mBottom,
+			mLeft, mRight;
 
 };
 

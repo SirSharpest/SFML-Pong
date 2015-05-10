@@ -26,6 +26,7 @@ private:
 	void render();
 	void processEvents();
 	bool isRectCollision(sf::Sprite &rect1, sf::Sprite &rect2);
+	bool isRectCollision(sf::RectangleShape &rect1, sf::Sprite &rect2);
 	void handleCollisions();
 	void updateFPSCounter(sf::Time dt);
     void updateScores(bool p1Scored);

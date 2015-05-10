@@ -184,6 +184,7 @@ void Game::handleCollisions(){
     //check for colliding with paddles
     if(isRectCollision(g_Ball, g_Player1)){
         g_Ball.reverseX();
+
     }
     else if (isRectCollision(g_Ball, g_Player2)){
         g_Ball.reverseX();
@@ -209,6 +210,15 @@ bool Game::isRectCollision(sf::Sprite &sprite1, sf::Sprite &sprite2){
 		sf::FloatRect r1=sprite1.getGlobalBounds();
 	    sf::FloatRect r2=sprite2.getGlobalBounds();
 	    return r1.intersects(r2);
+
+}
+
+//check rectangles for collision without taking into account where the collision is
+bool Game::isRectCollision(sf::RectangleShape &sprite1, sf::Sprite &sprite2){
+
+    sf::FloatRect r1=sprite1.getGlobalBounds();
+    sf::FloatRect r2=sprite2.getGlobalBounds();
+    return r1.intersects(r2);
 
 }
 
