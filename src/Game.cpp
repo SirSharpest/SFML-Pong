@@ -38,7 +38,7 @@ g_P2NumScore(0)
 
 
 	//setting window properties
-	g_Window.setVerticalSyncEnabled(false);
+	g_Window.setVerticalSyncEnabled(true);
 	g_Window.setFramerateLimit(FRAMES_PER_SECOND);
 
 
@@ -186,6 +186,7 @@ void Game::handleCollisions(){
         g_Ball.reverseX();
 
     }
+
     else if (isRectCollision(g_Ball, g_Player2)){
         g_Ball.reverseX();
     }

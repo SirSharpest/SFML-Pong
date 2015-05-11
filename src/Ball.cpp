@@ -6,7 +6,7 @@
 
 Ball::Ball():
 mBallTexture(),
-mMovement(300,200){
+mMovement(100,200){
 
     mBallTexture.loadFromFile("images/ball.png");
     this->setTexture(mBallTexture);

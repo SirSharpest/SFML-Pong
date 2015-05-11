@@ -127,6 +127,7 @@ sf::RectangleShape* Player::getRight(){
 
     mRight.setPosition((this->getPosition().x + this->getGlobalBounds().width),
                        (this->getPosition().y + this->getGlobalBounds().height));
+
     mRight.setSize(sf::Vector2f(2, this->getGlobalBounds().height));
 
     return &mRight;
