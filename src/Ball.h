@@ -22,12 +22,15 @@ public:
     void reverseY();
 
     void reset();
+    void increaseSpeed();
+
 
 private:
 
     sf::Texture mBallTexture;
     sf::Vector2f mMovement;
 
+    int numRebounds;
 
 };
 

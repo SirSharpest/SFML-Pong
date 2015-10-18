@@ -184,11 +184,14 @@ void Game::handleCollisions(){
     //check for colliding with paddles
     if(isRectCollision(g_Ball, g_Player1)){
         g_Ball.reverseX();
+		g_Ball.increaseSpeed();
+
 
     }
 
     else if (isRectCollision(g_Ball, g_Player2)){
         g_Ball.reverseX();
+		g_Ball.increaseSpeed();
     }
 
     //check if ball has exited left or right of screen
