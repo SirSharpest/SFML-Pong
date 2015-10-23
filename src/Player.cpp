@@ -15,6 +15,9 @@ mSize(1,1),
 mColor(sf::Color::Blue),
 mIsMovingUp(false),
 mIsMovingDown(false),
+mIsTurbo(false),
+mIsCollidingTop(false),
+mIsCollidingBottom(false),
 mPlayerTexture(),
 mTop(),
 mBottom(),
@@ -32,7 +35,9 @@ mRight()
 //is given the key that has been pressed and handles the input for it
 void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed){
 
-	if(key == sf::Keyboard::W)
+    if(key == sf::Keyboard::Space)
+        mIsTurbo = isPressed;
+	else if(key == sf::Keyboard::W)
 		mIsMovingUp = isPressed;
 	else if(key == sf::Keyboard::S)
 		mIsMovingDown = isPressed;
@@ -52,15 +57,20 @@ void Player::updatePlayer(sf::Time elapsedTime){
     mVelocity.x = 0;
     mVelocity.y = 0;
 
+
     //Handle if player keys are pressed to move up
-    //or down
-    if(mIsMovingUp){
+    //or down && is not going to collide with top or bottom respectfully
+    if(mIsMovingUp && !mIsCollidingTop){
         mVelocity.y = -mSpeed;
     }
-    else if(mIsMovingDown){
+    else if(mIsMovingDown && !mIsCollidingBottom){
         mVelocity.y = mSpeed;
     }
 
+    //this is a toggle for faster movement in the game for the user
+    if(mIsTurbo){
+        mVelocity.y = mVelocity.y * 3;
+    }
 
     //move the play based on current mVelocity size
     this->move(mVelocity * elapsedTime.asSeconds());
@@ -140,3 +150,14 @@ Player::~Player() {
 	// TODO Auto-generated destructor stub
 }
 
+void Player::isCollidingTop(bool status) {
+    mIsCollidingTop = status;
+}
+
+void Player::isCollidingBottom(bool status) {
+    mIsCollidingBottom = status;
+}
+
+float Player::getHeight() {
+    return this->getGlobalBounds().height;
+}

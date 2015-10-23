@@ -36,8 +36,8 @@ void Ball::reverseX() {
 
 void Ball::increaseSpeed() {
 
-    mMovement.x = mMovement.x + (numRebounds*mMovement.x/20);
-    mMovement.y = mMovement.y + (numRebounds*mMovement.y/20);
+    mMovement.x = mMovement.x + (numRebounds*mMovement.x/70);
+    mMovement.y = mMovement.y + (numRebounds*mMovement.y/70);
 }
 
 void Ball::reset(){

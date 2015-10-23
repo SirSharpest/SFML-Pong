@@ -204,6 +204,19 @@ void Game::handleCollisions(){
 		updateScores(true);
     }
 
+	//Collision detection  to stop player paddle leaving game area
+    if(g_Player1.getPosition().y < 1){
+        g_Player1.isCollidingTop(true);
+    }else if(g_Player1.getPosition().y > 1){
+        g_Player1.isCollidingTop(false);
+    }
+
+    if(g_Player1.getPosition().y > 480-g_Player1.getHeight()){
+        g_Player1.isCollidingBottom(true);
+    }else if(g_Player1.getPosition().y > 1){
+        g_Player1.isCollidingBottom(false);
+    }
+
 
 }
 

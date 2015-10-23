@@ -18,6 +18,9 @@ public:
 	void updatePlayer(sf::Time elapsedTime);
     void autoMove(sf::Sprite spriteToFollow, sf::Time elapsedTime);
 	sf::Vector2f getVelocity();
+	void isCollidingTop(bool status);
+	void isCollidingBottom(bool status);
+	float getHeight();
 
 	sf::RectangleShape* getTop();
 	sf::RectangleShape* getBottom();
@@ -34,7 +37,9 @@ private:
 	sf::Color mColor;
 
 	//movement flags for player
-	bool mIsMovingUp, mIsMovingDown;
+	bool mIsMovingUp, mIsMovingDown, mIsTurbo;
+	//position flags for player
+	bool mIsCollidingTop, mIsCollidingBottom;
 
 	sf::Texture mPlayerTexture;
 
