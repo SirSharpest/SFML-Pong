@@ -22,10 +22,6 @@ public:
 	void isCollidingBottom(bool status);
 	float getHeight();
 
-	sf::RectangleShape* getTop();
-	sf::RectangleShape* getBottom();
-	sf::RectangleShape* getLeft();
-	sf::RectangleShape* getRight();
 
 
 private:

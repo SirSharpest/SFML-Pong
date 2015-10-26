@@ -104,45 +104,6 @@ void Player::autoMove(sf::Sprite spriteToFollow, sf::Time elapsedTime) {
 
 }
 
-/*
- * Grop of functions to get the sides of objects
- */
-sf::RectangleShape* Player::getTop(){
-
-
-    mTop.setPosition(this->getPosition());
-    mTop.setSize(sf::Vector2f(this->getGlobalBounds().width, 2));
-
-    return &mTop;
-
-
-}
-sf::RectangleShape* Player::getBottom(){
-
-    mBottom.setPosition(this->getPosition().x, (this->getPosition().y +
-                        this->getGlobalBounds().height));
-    mBottom.setSize(sf::Vector2f(this->getGlobalBounds().width, 2));
-
-    return &mBottom;
-
-}
-sf::RectangleShape* Player::getLeft(){
-
-    mLeft.setPosition(this->getPosition());
-    mLeft.setSize(sf::Vector2f(2, this->getGlobalBounds().height));
-
-    return &mLeft;
-}
-sf::RectangleShape* Player::getRight(){
-
-    mRight.setPosition((this->getPosition().x + this->getGlobalBounds().width),
-                       (this->getPosition().y + this->getGlobalBounds().height));
-
-    mRight.setSize(sf::Vector2f(2, this->getGlobalBounds().height));
-
-    return &mRight;
-
-}
 
 
 

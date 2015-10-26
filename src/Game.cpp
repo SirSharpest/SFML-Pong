@@ -1,5 +1,8 @@
 /*
-a * Game.cpp
+ * Game.cpp
+ *
+ *  TODO Change collision to be within objects
+ *  TODO Implement AABB collision
  *
  *  Created on: 24 Mar 2015
  *      Author: Nathan Hughes
@@ -172,6 +175,10 @@ void Game::update(sf::Time elapsedTime){
 
 //Put all the collision checking and handling here
 void Game::handleCollisions(){
+
+	/*
+	 * TODO If ball collides with paddle, push outside of paddle, then alter course
+	 */
 
     //Check for the ball on top of screen and bottom
     if(g_Ball.getPosition().y >= 460){
